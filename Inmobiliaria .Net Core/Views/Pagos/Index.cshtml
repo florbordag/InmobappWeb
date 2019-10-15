@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Inmobiliaria_.Net_Core.Models.Pago>
+
+@{
+    ViewData["Title"] = "Index";
+    Alquiler alquiler = ViewBag.alquiler;
+    var pregunta = alquiler.vigente() ? true : false;
+}
+
+<h2>Pagos para el alquiler @alquiler.IdContrato</h2>
+<h6>De <b> @alquiler.Inquilino.Nombre @alquiler.Inquilino.Apellido </b> en <b> @alquiler.Inmueble.Direccion</b></h6>
+
+    <a asp-controller="Alquileres" asp-action="Index">Atras</a> -
+    @if (pregunta == true || pregunta.Equals(""))
+{
+        <a asp-action="Create" asp-route-id="@alquiler.IdContrato">Agregar</a>
+}
+else
+{
+        <b class="text-info">El contrato finalizó y ya no se pueden agregar pagos</b>
+}
+<div class="row">
+    <div class="col"><h5 style="margin:35px;text-align:center"><span class="text-success">SOBRANTE: $@ViewBag.Sobrante </span></h5></div><div class="col"><h5 style="margin:35px;text-align:center"><span class="text-danger"> DEUDA: $@ViewBag.Deuda</span></h5></div>
+
+</div>
+
+<table class="table" style="margin-bottom:45px">
+    <thead>
+        <tr align="center">
+            <th>
+                @Html.DisplayNameFor(model => model.NroPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Importe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr align="center">
+            <td>
+                @Html.DisplayFor(modelItem => item.NroPago)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Importe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><span class="lnr lnr-cross"></span></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

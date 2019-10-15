@@ -1,0 +1,64 @@
+﻿@model Inmobiliaria_.Net_Core.Models.Inquilino
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Eliminar inquilino</h2>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Delete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdInquilino" />
+            <div class="form-group">
+                <p>Desea eliminar el inquilino <b> @ViewBag.persona </b> ? </p>
+            </div>
+            <dl class="row">
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.Nombre) <hr />
+                </dd>
+
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.Dni)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.Dni)<hr />
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.Telefono)<hr />
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.NombreGarante)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.NombreGarante)<hr />
+                </dd>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.DniGarante)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.DniGarante)<hr />
+                </dd>
+            </dl>
+            <div class="form-group">
+                <input type="submit" value="Eliminar" class="btn btn-primary" />
+                <button asp-action="Index" class="btn btn-secondary">Cancelar</button>
+            </div>
+         
+            
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
