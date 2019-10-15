@@ -45,6 +45,7 @@ namespace Inmobiliaria_.Net_Core.Controllers
         
             try
             {
+                alquiler.Vigente = true;
                 repositorio.Alta(alquiler);
                 TempData["Id"] = "creó el alquiler";
                 return RedirectToAction(nameof(Index));
@@ -95,28 +96,23 @@ namespace Inmobiliaria_.Net_Core.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Alquiler collection)
+        public ActionResult Delete(int id, Alquiler alquiler)
         {
+
             try
             {
-                repositorio.Baja(id);
-                TempData["Id"] = "eliminó el alquiler";
+                alquiler = repositorio.FinalizarContrato(alquiler);
+                TempData["Id"] = "Finalizo el contrato de alquiler";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                if (ex.Message.StartsWith("The DELETE statement conflicted with the REFERENCE"))
-                {
-                    ViewBag.trato = " el locador " + collection.Inmueble.Duenio.Nombre + " " + collection.Inmueble.Duenio.Apellido + " y el locatario " + collection.Inquilino.Nombre + " " + collection.Inquilino.Apellido + " para el inmueble con dirección en " + collection.Inmueble.Direccion;
-                    ViewBag.Error = "No se puede eliminar el alquiler ya que tiene pagos a su nombre";
-                }
-                else
-                {
-                    ViewBag.Error = ex.Message;
-                    ViewBag.StackTrate = ex.StackTrace;
-                }
-                return View(collection);
+                ViewBag.Error = ex.Message;
+                ViewBag.StackTrate = ex.StackTrace;
+                return View(alquiler);
             }
+
+
         }
 
     }

@@ -206,6 +206,28 @@ namespace Inmobiliaria_.Net_Core.Models
             }
 
         }
-        
+        public Alquiler FinalizarContrato(Alquiler a)
+        {
+            DateTime hoy = DateTime.Now;
+            a.ProximoFin = hoy.ToString();
+            a.Multa = a.calcularMulta();
+            a.Vigente = false;
+            
+            int res = -1;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = $"UPDATE Alquiler SET FechaFin='{a.ProximoFin}', Multa='{a.calcularMulta()}' " +
+                    $"WHERE IdContrato = {a.IdContrato}";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    connection.Open();
+                    res = command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            return a;
+        }
+
     }
 }

@@ -163,5 +163,6 @@ namespace Inmobiliaria_.Net_Core.Models
             throw new NotImplementedException();
         }
         public Pago Update(Pago p) { throw new NotImplementedException(); }
+        public Pago FinalizarContrato(Pago i) { throw new NotImplementedException(); }
     }
 }

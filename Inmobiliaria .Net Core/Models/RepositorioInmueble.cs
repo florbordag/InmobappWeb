@@ -199,5 +199,6 @@ namespace Inmobiliaria_.Net_Core.Models
             return res;
         }
         public Inmueble Update(Inmueble i) { throw new NotImplementedException(); }
+        public Inmueble FinalizarContrato(Inmueble i) { throw new NotImplementedException(); }
     }
 }

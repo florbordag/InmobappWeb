@@ -47,11 +47,11 @@
     <tbody>
         @foreach (var item in Model)
         {
-            var pregunta2 = item.Multa ?? null;
-
            
+
+
         <tr align="center">
-            @if (item.vigente())
+            @if (item.vigente() || item.Vigente == true)
             {
                 <td>
                     SI
@@ -81,7 +81,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.MontoTotal)
             </td>
-            @if (pregunta2 == null)
+            @if (item.vigente())
             {
                 <td>
                     -
@@ -90,7 +90,7 @@
             else
             {
                 <td>
-                    @Html.DisplayFor(modelItem => item.Multa)
+                    @item.calcularMulta();
                 </td>
             }
             <td>

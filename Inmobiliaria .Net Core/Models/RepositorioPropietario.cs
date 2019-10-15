@@ -200,5 +200,6 @@ namespace Inmobiliaria_.Net_Core.Models
             return res;
         }
         public Propietario Update(Propietario p) { throw new NotImplementedException(); }
+        public Propietario FinalizarContrato(Propietario i) { throw new NotImplementedException(); }
     }
 }

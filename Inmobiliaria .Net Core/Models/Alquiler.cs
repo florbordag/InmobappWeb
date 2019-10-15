@@ -24,6 +24,7 @@ namespace Inmobiliaria_.Net_Core.Models
         public decimal MontoTotal { get; set; }
         public Nullable<Decimal> Multa { get; set; }
         public String ProximoFin { get; set; }
+        public Boolean Vigente { get; set; }
         public Boolean vigente()
         {
             
@@ -36,7 +37,7 @@ namespace Inmobiliaria_.Net_Core.Models
         }
        public decimal calcularMulta()
         {
-            Decimal multa=0;
+            Decimal multa= MontoTotal;
 
             DateTime hoy = DateTime.Now; DateTime fin;
             if (ProximoFin != null) { fin = Convert.ToDateTime(ProximoFin); } else { fin = Convert.ToDateTime(FechaFin); }
@@ -53,10 +54,10 @@ namespace Inmobiliaria_.Net_Core.Models
                 DateTime fechamedia = ini.AddDays(diamid);
                 fechamedia = fechamedia.AddYears(añomid);
                 
-                if (fin < fechamedia) { multa = MontoTotal * 2; } else { multa = MontoTotal; }
+                if (fin < fechamedia) { multa = MontoTotal * 2; }
             }
     
-            Multa = multa;
+            
             return multa;
         }
    

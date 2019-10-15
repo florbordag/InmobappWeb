@@ -11,6 +11,7 @@ namespace Inmobiliaria_.Net_Core.Models
 		int Baja(int id);
 		int Modificacion(T p);
         T Update(T p);
+        T FinalizarContrato(T p);
         
 		IList<T> ObtenerTodos();
 		T ObtenerPorId(int id);
